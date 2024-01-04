@@ -7,9 +7,22 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Home'),
+      ),
       body: Center(
-        child: Text('Home screen!'),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            FilledButton.icon(
+              icon: const Icon(Icons.movie),
+              label: const Text('Get movies'),
+              onPressed: () {},
+            ),
+            Text('Home screen!'),
+          ],
+        ),
       ),
     );
   }
