@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:card_swiper/card_swiper.dart';
 
 import 'package:evertec_movies/domain/entities/movie_entity.dart';
+import 'package:go_router/go_router.dart';
 
 class MoviesSlideShow extends StatelessWidget {
   final List<MovieEntity> movies;
@@ -59,7 +60,9 @@ class _ItemCard extends StatelessWidget {
                 (loadingProgress != null)
                     ? const DecoratedBox(
                         decoration: BoxDecoration(color: Colors.black12))
-                    : FadeIn(child: child),
+                    : GestureDetector(
+                        onTap: () => context.push('/movie-detail/${movie.id}'),
+                        child: FadeIn(child: child)),
           ),
         ),
       ),

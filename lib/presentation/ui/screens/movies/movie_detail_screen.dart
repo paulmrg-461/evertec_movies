@@ -3,6 +3,7 @@ import 'package:evertec_movies/domain/entities/movie_entity.dart';
 import 'package:evertec_movies/presentation/providers/providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
 
 class MovieDetailScreen extends ConsumerStatefulWidget {
   static const name = 'movie-detail-screen';
@@ -88,6 +89,13 @@ class _MovieDetails extends StatelessWidget {
                       height: 6,
                     ),
                     Text(movie.overview),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      "Release date: ${DateFormat('MM-dd-yyyy').format(movie.releaseDate)}",
+                      style: textStyles.titleMedium,
+                    ),
                   ],
                 ),
               )
