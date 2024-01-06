@@ -2,6 +2,7 @@ import 'package:animate_do/animate_do.dart';
 import 'package:evertec_movies/config/helpers/human_formats.dart';
 import 'package:evertec_movies/domain/entities/movie_entity.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class MoviesHorizontalListView extends StatelessWidget {
   final List<MovieEntity> movies;
@@ -111,7 +112,10 @@ class _Slide extends StatelessWidget {
                     (loadingProgress != null)
                         ? const DecoratedBox(
                             decoration: BoxDecoration(color: Colors.black12))
-                        : FadeIn(child: child),
+                        : GestureDetector(
+                            onTap: () =>
+                                context.push('/movie-detail/${movieEntity.id}'),
+                            child: FadeIn(child: child)),
               ),
             ),
           ),
