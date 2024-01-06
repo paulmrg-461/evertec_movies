@@ -1,9 +1,10 @@
 import 'dart:async';
-import 'package:evertec_movies/config/helpers/human_formats.dart';
 import 'package:flutter/material.dart';
 
-import 'package:evertec_movies/domain/entities/movie_entity.dart';
 import 'package:animate_do/animate_do.dart';
+
+import 'package:evertec_movies/config/helpers/human_formats.dart';
+import 'package:evertec_movies/domain/entities/movie_entity.dart';
 
 typedef SearchMoviesCallback = Future<List<MovieEntity>> Function(String query);
 
@@ -21,8 +22,7 @@ class SearchMovieDelegate extends SearchDelegate<MovieEntity?> {
     required this.searchMovies,
     required this.initialMovies,
   }) : super(
-          searchFieldLabel: 'Buscar películas',
-          // textInputAction: TextInputAction.done
+          searchFieldLabel: 'Search movies...',
         );
 
   void clearStreams() {
@@ -35,11 +35,6 @@ class SearchMovieDelegate extends SearchDelegate<MovieEntity?> {
     if (_debounceTimer?.isActive ?? false) _debounceTimer!.cancel();
 
     _debounceTimer = Timer(const Duration(milliseconds: 500), () async {
-      // if ( query.isEmpty ) {
-      //   debouncedMovies.add([]);
-      //   return;
-      // }
-
       final movies = await searchMovies(query);
       initialMovies = movies;
       debouncedMovies.add(movies);
@@ -67,9 +62,6 @@ class SearchMovieDelegate extends SearchDelegate<MovieEntity?> {
       },
     );
   }
-
-  // @override
-  // String get searchFieldLabel => 'Buscar película';
 
   @override
   List<Widget>? buildActions(BuildContext context) {

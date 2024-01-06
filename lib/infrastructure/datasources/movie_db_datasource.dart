@@ -49,11 +49,14 @@ class MovieDbDatasource implements MoviesDatasource {
   }
 
   @override
-  Future<List<MovieEntity>> searchMoviesByName({String query = ''}) async {
+  Future<List<MovieEntity>> searchMoviesByName(String query) async {
+    print('TOLA');
     if (query.isEmpty || query == '') return [];
 
     final response =
         await dio.get('/search/movie', queryParameters: {'query': query});
+
+    print(response);
 
     return _jsonToMovies(response.data);
   }
