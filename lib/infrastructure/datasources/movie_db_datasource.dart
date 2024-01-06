@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:evertec_movies/domain/datasources/movies_datasource.dart';
 import 'package:evertec_movies/domain/entities/movie_entity.dart';
 import 'package:evertec_movies/config/constants/environment.dart';
 import 'package:evertec_movies/infrastructure/mappers/movie_mapper.dart';
@@ -37,7 +38,7 @@ class MovieDbDatasource implements MoviesDatasource {
   }
 
   @override
-  Future<MovieEntity> getMovieById({required String id}) async {
+  Future<MovieEntity> getMovieById({String id = ''}) async {
     final Response response = await dio.get('/movie/$id');
 
     if (response.statusCode != 200)

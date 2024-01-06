@@ -15,6 +15,6 @@ class MovieRepositoryImpl implements MoviesRepository {
       moviesDatasource.getPopularMovies(page: page);
 
   @override
-  Future<MovieEntity> getMovieById({required String id}) =>
+  Future<MovieEntity> getMovieById({String id = ''}) =>
       moviesDatasource.getMovieById(id: id);
 }
