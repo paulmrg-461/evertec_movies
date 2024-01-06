@@ -1,6 +1,6 @@
 import 'package:evertec_movies/config/constants/environment.dart';
 import 'package:evertec_movies/domain/entities/movie_entity.dart';
-import 'package:evertec_movies/infrastructure/models/models/models.dart';
+import 'package:evertec_movies/infrastructure/models/models.dart';
 
 class MovieMapper {
   static MovieEntity movieDbToEntity(MovieMovieDB movieDB) => MovieEntity(
