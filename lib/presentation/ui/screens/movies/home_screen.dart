@@ -36,26 +36,36 @@ class _HomeViewState extends ConsumerState<_HomeView> {
     final List<MovieEntity> upcomingMovies = ref.watch(upcomingProvider);
     final List<MovieEntity> slideShowMovies =
         ref.watch(moviesSlideshowProvider);
-    return Column(
-      children: [
-        const CustomAppBar(),
-        MoviesSlideShow(
-          movies: slideShowMovies,
+    return CustomScrollView(
+      slivers: [
+        const SliverAppBar(
+          floating: true,
+          title: CustomAppBar(),
         ),
-        MoviesHorizontalListView(
-          movies: upcomingMovies,
-          title: 'Upcoming',
-          subtitle: 'Count: ${upcomingMovies.length}',
-          loadNextPage: () =>
-              ref.read(upcomingProvider.notifier).loadNextPage(),
-        ),
-        MoviesHorizontalListView(
-          movies: upcomingMovies,
-          title: 'Populars',
-          subtitle: 'Count: ${upcomingMovies.length}',
-          loadNextPage: () =>
-              ref.read(upcomingProvider.notifier).loadNextPage(),
-        ),
+        SliverList(
+            delegate: SliverChildBuilderDelegate((context, index) {
+          return Column(
+            children: [
+              MoviesSlideShow(
+                movies: slideShowMovies,
+              ),
+              MoviesHorizontalListView(
+                movies: upcomingMovies,
+                title: 'Upcoming',
+                subtitle: 'Count: ${upcomingMovies.length}',
+                loadNextPage: () =>
+                    ref.read(upcomingProvider.notifier).loadNextPage(),
+              ),
+              MoviesHorizontalListView(
+                movies: upcomingMovies,
+                title: 'Populars',
+                subtitle: 'Count: ${upcomingMovies.length}',
+                loadNextPage: () =>
+                    ref.read(upcomingProvider.notifier).loadNextPage(),
+              ),
+            ],
+          );
+        }, childCount: 1)),
       ],
     );
   }
