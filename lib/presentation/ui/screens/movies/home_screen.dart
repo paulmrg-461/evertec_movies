@@ -42,22 +42,14 @@ class _HomeViewState extends ConsumerState<_HomeView> {
         MoviesSlideShow(
           movies: slideShowMovies,
         ),
-        // Expanded(
-        //   child: ListView.builder(
-        //     itemCount: upcomingMovies.length,
-        //     itemBuilder: (context, index) {
-        //       final MovieEntity upcomingMovie = upcomingMovies[index];
-        //       return ListTile(
-        //         title: Text(upcomingMovie.title),
-        //         subtitle: Text(
-        //           upcomingMovie.overview,
-        //           overflow: TextOverflow.ellipsis,
-        //           maxLines: 2,
-        //         ),
-        //       );
-        //     },
-        //   ),
-        // ),
+        MoviesHorizontalListView(
+          movies: upcomingMovies,
+          title: 'Upcoming',
+          subtitle: 'Movies',
+          loadNextPage: () {
+            print('tola');
+          },
+        )
       ],
     );
   }
