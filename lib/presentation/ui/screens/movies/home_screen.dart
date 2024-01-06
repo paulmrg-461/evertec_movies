@@ -45,10 +45,9 @@ class _HomeViewState extends ConsumerState<_HomeView> {
         MoviesHorizontalListView(
           movies: upcomingMovies,
           title: 'Upcoming',
-          subtitle: 'Movies',
-          loadNextPage: () {
-            print('tola');
-          },
+          subtitle: '${upcomingMovies.length}',
+          loadNextPage: () =>
+              ref.read(upcomingProvider.notifier).loadNextPage(),
         )
       ],
     );
