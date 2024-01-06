@@ -2,9 +2,15 @@ import 'package:evertec_movies/domain/entities/movie_entity.dart';
 import 'package:evertec_movies/presentation/providers/movies/movies_repository_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final upcomingProvider =
+final upcomingMoviesProvider =
     StateNotifierProvider<MoviesNotifier, List<MovieEntity>>((ref) {
   final fetchMoreMovies = ref.watch(moviesRepositoryProvider).getUpcomingMovies;
+  return MoviesNotifier(fetchMoreMovies: fetchMoreMovies);
+});
+
+final popularMoviesProvider =
+    StateNotifierProvider<MoviesNotifier, List<MovieEntity>>((ref) {
+  final fetchMoreMovies = ref.watch(moviesRepositoryProvider).getPopularMovies;
   return MoviesNotifier(fetchMoreMovies: fetchMoreMovies);
 });
 
