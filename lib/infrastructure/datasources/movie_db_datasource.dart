@@ -15,7 +15,8 @@ class MovieDbDatasource implements MoviesDatasource {
 
   @override
   Future<List<MovieEntity>> getUpcomingMovies({int page = 1}) async {
-    final Response response = await dio.get('/movie/upcoming');
+    final Response response =
+        await dio.get('/movie/upcoming', queryParameters: {'page': page});
 
     final MovieDbResponse movieDbResponse =
         MovieDbResponse.fromJson(response.data);
