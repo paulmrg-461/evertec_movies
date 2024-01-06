@@ -1,9 +1,8 @@
 import 'package:dio/dio.dart';
-import 'package:evertec_movies/domain/datasources/movies_datasource.dart';
 import 'package:evertec_movies/domain/entities/movie_entity.dart';
 import 'package:evertec_movies/config/constants/environment.dart';
 import 'package:evertec_movies/infrastructure/mappers/movie_mapper.dart';
-import 'package:evertec_movies/infrastructure/models/the_movie_db/movie_db_response.dart';
+import 'package:evertec_movies/infrastructure/models/models/models.dart';
 
 class MovieDbDatasource implements MoviesDatasource {
   final Dio dio = Dio(BaseOptions(
@@ -35,5 +34,16 @@ class MovieDbDatasource implements MoviesDatasource {
         await dio.get('/movie/popular', queryParameters: {'page': page});
 
     return _jsonToMovies(response.data);
+  }
+
+  @override
+  Future<MovieEntity> getMovieById({required String id}) async {
+    final Response response = await dio.get('/movie/$id');
+
+    if (response.statusCode != 200)
+      throw Exception('Movie with id: $id not found');
+
+    final movieDetails = MovieDetails.fromJson(response.data);
+    return MovieMapper.movieDetailsToEntity(movieDetails);
   }
 }
