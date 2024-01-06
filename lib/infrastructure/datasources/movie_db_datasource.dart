@@ -13,16 +13,27 @@ class MovieDbDatasource implements MoviesDatasource {
         'language': 'en-US'
       }));
 
+  List<MovieEntity> _jsonToMovies(Map<String, dynamic> json) {
+    final MovieDbResponse movieDbResponse = MovieDbResponse.fromJson(json);
+    final List<MovieEntity> movies = movieDbResponse.results
+        .map((e) => MovieMapper.movieDbToEntity(e))
+        .toList();
+    return movies;
+  }
+
   @override
   Future<List<MovieEntity>> getUpcomingMovies({int page = 1}) async {
     final Response response =
         await dio.get('/movie/upcoming', queryParameters: {'page': page});
 
-    final MovieDbResponse movieDbResponse =
-        MovieDbResponse.fromJson(response.data);
-    final List<MovieEntity> movies = movieDbResponse.results
-        .map((e) => MovieMapper.movieDbToEntity(e))
-        .toList();
-    return movies;
+    return _jsonToMovies(response.data);
+  }
+
+  @override
+  Future<List<MovieEntity>> getPopularMovies({int page = 1}) async {
+    final Response response =
+        await dio.get('/movie/popular', queryParameters: {'page': page});
+
+    return _jsonToMovies(response.data);
   }
 }

@@ -9,4 +9,8 @@ class MovieRepositoryImpl implements MoviesRepository {
   @override
   Future<List<MovieEntity>> getUpcomingMovies({int page = 1}) =>
       moviesDatasource.getUpcomingMovies(page: page);
+
+  @override
+  Future<List<MovieEntity>> getPopularMovies({int page = 1}) =>
+      moviesDatasource.getPopularMovies(page: page);
 }
