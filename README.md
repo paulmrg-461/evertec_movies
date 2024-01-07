@@ -2,8 +2,9 @@
 
 ## _The Movie DB API_
 The Movie DB API Documentation.
-
 <a  href="https://developer.themoviedb.org/reference/">https://developer.themoviedb.org/reference/</a>
+
+Please rename file .env.template to .env and set your The Movie DB API KEY.
 
 ## _Flutter check_
 Please check if you've Flutter Framework installed.
